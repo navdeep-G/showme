@@ -1,0 +1,10 @@
+ShowMe -- Quick and easy debugging for Python
+=============================================
+
+Usage
+-----
+
+Hmmm, I wonder what's being passed in there?
+
+	@showme.args
+	def complex_function(a, b, c):…
