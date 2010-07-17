@@ -1,6 +1,8 @@
 ShowMe -- Quick and easy debugging for Python
 =============================================
 
+(Beware, this is still in doc-driven development)
+
 Usage
 -----
 
