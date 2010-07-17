@@ -4,7 +4,42 @@ ShowMe -- Quick and easy debugging for Python
 Usage
 -----
 
-Hmmm, I wonder what's being passed in there?
+Print passed-in arguments.
 
 	@showme.args
+	def complex_function(a, b, c):…
+
+	
+Print function execution time.
+
+	@showme.time
+	def complex_function(a, b, c):…
+
+
+Print global variables available at runtime.
+	
+	@showme.globals
+	def complex_function(a, b, c):…
+
+
+Print local variables available at runtime.
+	
+	@showme.locals
+	def complex_function(a, b, c):…
+
+
+Pretty print returned data.
+	
+	@showme.return
+	def complex_function(a, b, c):…
+
+
+Pretty print function documentation.
+	
+	@showme.docs
+	def complex_function(a, b, c):…
+	
+
+Print size (in bytes) of returned data.
+	@showme.size
 	def complex_function(a, b, c):…
