@@ -4,8 +4,8 @@
 # _(__	) _	 / / // /_/ /__ |/ |/ / _  / / / / //  __/
 # /____/  /_/ /_/ \____/ ____/|__/	/_/ /_/ /_/ \___/
 
-from showme.packages.colorama import *
-from showme.packages.decorator import decorator
+from colorama import *
+from decorator import decorator
 
 import cProfile
 import inspect
