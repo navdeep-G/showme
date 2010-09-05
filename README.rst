@@ -1,7 +1,22 @@
 ShowMe -- Quick and easy debugging for Python
 =============================================
 
-(Beware, this is still in doc-driven development)
+ShowMe is a simple set of extremely useful function decorators for Python.
+It allows you to view trace information, execution time, cputime, and function
+documentation.
+
+
+Installation
+------------
+
+To use **showme**, simply:
+
+``pip install showme``
+
+or, if you must:
+
+``easy_install showme``
+
 
 Usage
 -----
@@ -9,7 +24,7 @@ Usage
 Print passed-in arguments and function calls. ::
 
 	@showme.trace
-	def complex_function(a, b, c, **kwargs):…
+	def complex_function(a, b, c, **kwargs):
 	
 	
 	>>> complex_function('alpha', 'beta', False, debug=True)
@@ -21,7 +36,7 @@ Print passed-in arguments and function calls. ::
 Print function execution time. ::
 
     @showme.cputime
-    def complex_function(a, b, c):…
+    def complex_function(a, b, c):
     
     >>> complex_function()
          3 function calls in 0.013 CPU seconds
@@ -32,10 +47,10 @@ Print function execution time. ::
         1    0.000    0.000    0.000    0.000 {range}
 
 
-Print local variables available at runtime. ::
-	
-	@showme.locals
-	def complex_function(a, b, c):…
+.. Print local variables available at runtime. ::
+.. 	
+.. 	@showme.locals
+.. 	def complex_function(a, b, c):
 
 
 
