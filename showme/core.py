@@ -1,76 +1,93 @@
-#		  ______									  
-# ___________  /_ ______ ___	  _________ ___ _____ 
+#		  ______
+# ___________  /_ ______ ___	  _________ ___ _____
 # __  ___/__  __ \_	 __ \__ | /| / /__	__ `__ \_  _ \
 # _(__	) _	 / / // /_/ /__ |/ |/ / _  / / / / //  __/
-# /____/  /_/ /_/ \____/ ____/|__/	/_/ /_/ /_/ \___/ 
+# /____/  /_/ /_/ \____/ ____/|__/	/_/ /_/ /_/ \___/
 
+from showme.packages.colorama import *
 from showme.packages.decorator import decorator
 
 import cProfile
 import inspect
-import pprint
+
+from time import time as now
 
 
-__version__ = '0.0.4'
+__version__ = '1.0.0'
 __author__ = 'Kenneth Reitz'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2010 Kenneth Reitz'
 
+__all__ = ('cputime',  'docs', 'time', 'trace')
 
-pp = pprint.PrettyPrinter(indent=4)
+
+# CLI Color
+init(autoreset=True)
 
 
 @decorator
-def time(f, *args, **kwargs):
-	"""Display CPU Time statistics of given function"""
+def cputime(f, *args, **kwargs):
+	"""Display CPU Time statistics of given function."""
+
+	print('CPU time for %s%s%s:' % (Fore.CYAN, _get_scope(f, args), Fore.RESET))
 
 	t = cProfile.Profile()
 	r = t.runcall(f, *args, **kwargs)
 	t.print_stats()
-	
+
 	return r
+
 	
-
-@decorator
-def globals(f, *args, **kwargs):
-	"""Display global variables"""
-	
-	print('Globals:')
-	print globals()
-	return f(*args, **kwargs)
-
-
-@decorator
-def locals(f, *args, **kwargs):
-	"""Display local variables"""
-	# print locals()
-	return f(*args, **kwargs)
-
-
 @decorator
 def docs(f, *args, **kwargs):
-	"""Display PyDocs of given function"""
-	print inspect.getdoc(f)
+	"""Display Docstrings of given function."""
+
+	print('Documentation for %s%s%s:' % (Fore.CYAN, _get_scope(f, args), Fore.RESET))
+	print(inspect.getdoc(f))
+	
 	return f(*args, **kwargs)
+
+
+@decorator
+def time(f, *args, **kwargs):
+	"""Display Runtime statistics of given function."""
+
+	print('Execution speed of %s%s%s:' % (Fore.CYAN, _get_scope(f, args), Fore.RESET))
+	_t0 = now()
+	_r = f(*args, **kwargs)
+	_t1 = now()
+
+	total_time =  _t1-_t0
+	print('%s seconds' % (total_time))
+
+	return _r
 
 
 @decorator
 def trace(f, *args, **kwargs):
-	"""Print scope, call, and argument information."""
+	"""Display epic argument and context call information of given function."""
 
-	_scope = inspect.getmodule(f).__name__
+	_scope = _get_scope(f, args)
 
-	# guess that function is a method of it's class
-	if f.func_name in dir(args[0].__class__):
-		_scope +=  '.' + args[0].__class__.__name__
-		_scope +=  '.' + f.__name__
-	else:
-		_scope +=  '.' + f.__name__
-		
-
-	print("calling %s() with \nargs: %s \nkwargs: %s" % (_scope, args, kwargs))
+	print("Calling %s%s%s with: \n   %sargs%s: %s \n   %skwargs%s: %s" % (
+		Fore.CYAN, _scope, Fore.RESET, Fore.BLUE, Fore.RESET,
+		args, Fore.BLUE, Fore.RESET, kwargs))
 
 	return f(*args, **kwargs)
 
 
+def _get_scope(f, args):
+	"""Get scope nameo of given function."""
 
+	_scope = inspect.getmodule(f).__name__
+	# guess that function is a method of it's class
+	try:
+		if f.func_name in dir(args[0].__class__):
+			_scope += '.' + args[0].__class__.__name__
+			_scope += '.' + f.__name__
+		else:
+			_scope += '.' + f.__name__
+	except IndexError:
+		_scope += '.' + f.__name__
+
+	return _scope

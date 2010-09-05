@@ -1,6 +1,18 @@
-.idea/encodings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/showme.iml
-.idea/vcs.xml
-.idea/workspace.xml
+# parser's output files
+output/*
+
+# application builds
+build/*
+dist/*
+
+# python skin
+.pyc
+.pyo
+
+# osx noise
+.DS_Store
+profile
+
+# pycharm noise
+.idea
+.idea/*

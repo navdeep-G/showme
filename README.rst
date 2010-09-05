@@ -20,7 +20,7 @@ Print passed-in arguments and function calls. ::
 	
 Print function execution time. ::
 
-    @showme.time
+    @showme.cputime
     def complex_function(a, b, c):…
     
     >>> complex_function()
@@ -30,12 +30,6 @@ Print function execution time. ::
         1    0.013    0.013    0.013    0.013 test_time.py:6(test)
         1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
         1    0.000    0.000    0.000    0.000 {range}
-
-
-Print global variables available at runtime. ::
-	
-	@showme.globals
-	def complex_function(a, b, c):…
 
 
 Print local variables available at runtime. ::

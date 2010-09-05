@@ -15,9 +15,7 @@ import showme
 @showme.docs
 def test():
 	"""sample docstring for test"""
-	for i in range(1000):
-		a = i ** i
+	pass
 
 if __name__ == '__main__':
-	import doctest
-	doctest.testmod()
+	test()

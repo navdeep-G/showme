@@ -16,13 +16,13 @@ if sys.argv[-1] == "publish":
 	sys.exit()
 
 setup(name='showme',
-	  version=showmes.core.__version__,
+	  version=showme.core.__version__,
 	  description='Painless Debugging and Inspection for Python',
 	  long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),
 	  author='Kenneth Reitz',
 	  author_email='me@kennethreitz.com',
 	  url='http://github.com/kennethreitz/showme',
-	  packages=['showmes'],
+	  packages=['showme'],
 	  license='MIT',
 	  classifiers = ( 
 		"Development Status :: 4 - Beta",
