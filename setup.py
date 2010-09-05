@@ -6,13 +6,14 @@ import sys
 
 from distutils.core import setup
 
+def publish():
+	"""Publish to PyPi"""
+	os.system("python setup.py sdist upload")
+	
 if sys.argv[-1] == 'publish':
 	publish()
 	sys.exit()
 
-def publish():
-	"""Publish to PyPi"""
-	os.system("python setup.py sdist upload")
 
 setup(
 	name='showme',
@@ -46,4 +47,3 @@ setup(
 	  )
 )
 	
-    
