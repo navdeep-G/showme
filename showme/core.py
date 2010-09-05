@@ -63,8 +63,10 @@ def trace(f, *args, **kwargs):
     # guess that function is a method of it's class
     if f.func_name in dir(args[0].__class__):
         _scope +=  '.' + args[0].__class__.__name__
+		_scope +=  '.' + f.__name__
     else:
         _scope +=  '.' + f.__name__
+		
 
     print("calling %s() with \nargs: %s \nkwargs: %s" % (_scope, args, kwargs))
 
