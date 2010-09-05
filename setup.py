@@ -3,8 +3,7 @@
 
 import os
 import sys
-import show
-
+import showme
 
 from distutils.core import setup
 
@@ -16,14 +15,14 @@ if sys.argv[-1] == "publish":
 	publish()
 	sys.exit()
 
-setup(name='show',
-	  version=show.core.__version__,
-	  description='Quick Debugging for Python',
+setup(name='showme',
+	  version=showmes.core.__version__,
+	  description='Painless Debugging and Inspection for Python',
 	  long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),
 	  author='Kenneth Reitz',
 	  author_email='me@kennethreitz.com',
-	  url='http://github.com/kennethreitz/show',
-	  packages=['show'],
+	  url='http://github.com/kennethreitz/showme',
+	  packages=['showmes'],
 	  license='MIT',
 	  classifiers = ( 
 		"Development Status :: 4 - Beta",
