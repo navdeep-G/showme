@@ -1,1 +1,2 @@
-# That's right. None. Enjoy.
+colorama>=0.1.18
+decorator>=3.2.0
