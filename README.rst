@@ -36,7 +36,7 @@ Print passed-in arguments and function calls. ::
 
 Print function execution time. ::
 
-    @showme.cputime
+    @showme.time
     def some_function(a):
         ...
     
