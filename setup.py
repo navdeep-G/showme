@@ -20,9 +20,9 @@ setup(
 	version='1.0.0',
 	description='Painless Debugging and Inspection for Python',
 	long_description=open('README.rst').read() + '\n\n' + open('HISTORY.rst').read(),
-	author='Kenneth Reitz',
-	author_email='me@kennethreitz.com',
-	url='http://github.com/kennethreitz/showme',
+	author='Navdeep Gill',
+	author_email='mr.navdeepgill@gmail.com',
+	url='http://github.com/navdeep-G/showme',
 	packages=['showme'],
 	install_requires=[
 		'colorama>=0.1.18', 
@@ -46,4 +46,3 @@ setup(
 	  'Topic :: Software Development :: Libraries :: Python Modules',
 	  )
 )
-	

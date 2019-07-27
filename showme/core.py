@@ -14,9 +14,9 @@ from time import time as now
 
 
 __version__ = '1.0.0'
-__author__ = 'Kenneth Reitz'
+__author__ = 'Navdeep Gill'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2010 Kenneth Reitz'
+__copyright__ = 'Copyright 2019 Navdeep Gill'
 
 __all__ = ('cputime',  'docs', 'time', 'trace')
 
