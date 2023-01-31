@@ -1,2 +1,15 @@
 colorama>=0.1.18
 decorator>=3.2.0
+# This file ensures that the pre-commit service is ran every time you commit.
+# Basically it ensures people only push files to GIT that are up to standard.
+# Run pip install on .tar.gz file in GitHub repository (For lava-nc only).
+#- https://github.com/lava-nc/lava/releases/download/v0.5.0/lava-nc-0.5.0.tar.gz
+https://github.com/a-t-0/lava/archive/refs/tags/v0.5.1.tar.gz
+# Allow for auto generation of type-hints during runtime.
+pyannotate
+# Run python tests.
+pytest-cov
+# Ensure the python function arguments are verified at runtime.
+typeguard
+# Allow typing for decorators.
+types-decorator

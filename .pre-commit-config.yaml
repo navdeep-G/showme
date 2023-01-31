@@ -1,0 +1,196 @@
+# This file specifies which checks are performed by the pre-commit service.
+# The pre-commit service prevents people from pushing code to git that is not
+# up to standards. # The reason mirrors are used instead of the actual
+# repositories for e.g. black and flake8, is because those repositories also
+# need to contain a pre-commit hook file, which they often don't by default.
+# So to resolve that, a mirror is created that includes such a file.
+
+default_language_version:
+    python: python3.10.  # or python3
+
+
+repos:
+# Test if the python code is formatted according to the Black standard.
+ - repo: https://github.com/Quantco/pre-commit-mirrors-black
+   rev: 22.12.0
+   hooks:
+     - id: black-conda
+       args:
+         - --safe
+         - --target-version=py36
+
+# Test if the python code is formatted according to the flake8 standard.
+ - repo: https://github.com/Quantco/pre-commit-mirrors-flake8
+   rev: 6.0.0
+   hooks:
+    - id: flake8-conda
+
+# Test if the import statements are sorted correctly.
+ - repo: https://github.com/PyCQA/isort
+   rev: 5.11.4
+   hooks:
+    - id: isort
+      args: ["--profile", "black", --line-length=79]
+
+# Test if the variable typing is correct. (Variable typing is when you say:
+# def is_larger(nr: int) -> bool: instead of def is_larger(nr). It makes
+# it explicit what type of input and output a function has.
+# - repo: https://github.com/python/mypy
+ - repo: https://github.com/pre-commit/mirrors-mypy
+### - repo: https://github.com/a-t-0/mypy
+   rev: v0.991
+   hooks:
+    - id: mypy
+      args: ["--disallow-untyped-calls", "--disallow-untyped-defs", "--disallow-incomplete-defs", "--disallow-any-explicit"]
+
+  # TODO:
+  #--strict
+  #--disallow-incomplete-defs
+  #--disallow-any-unimported
+  #--disallow-any-expr
+  #--disallow-any-decorated
+  #--disallow-any-explicit
+  #--disallow-any-generics
+  #--disallow-subclassing-any
+
+# Tests if there are spelling errors in the code.
+ - repo: https://github.com/codespell-project/codespell
+   rev: v2.2.2
+   hooks:
+    - id: codespell
+
+# Performs static code analysis to check for programming errors.
+ - repo: local
+   hooks:
+     - id: pylint
+       name: pylint
+       entry: pylint
+       language: system
+       types: [python]
+       args:
+         [
+           "-rn", # Only display messages
+           "-sn", # Don't display the score
+         ]
+
+# Runs additional tests that are created by the pre-commit software itself.
+ - repo: https://github.com/pre-commit/pre-commit-hooks
+   rev: v4.4.0
+   hooks:
+    # Check user did not add large files.
+    - id: check-added-large-files
+    # Check if `.py` files are written in valid Python syntax.
+    - id: check-ast
+    # Require literal syntax when initializing empty or zero Python builtin types.
+    - id: check-builtin-literals
+    # Checks if there are filenames that would conflict if case is changed.
+    - id: check-case-conflict
+    # Checks if the Python functions have docstrings.
+    - id: check-docstring-first
+    # Checks if any `.sh` files have a shebang like #!/bin/bash
+    - id: check-executables-have-shebangs
+    # Verifies json format of any `.json` files in repo.
+    - id: check-json
+    # Checks if there are any existing merge conflicts caused by the commit.
+    - id: check-merge-conflict
+    # Checks for symlinks which do not point to anything.
+    - id: check-symlinks
+    # Checks if xml files are formatted correctly.
+    - id: check-xml
+    # Checks if .yml files are valid.
+    - id: check-yaml
+    # Checks if debugger imports are performed.
+    - id: debug-statements
+    # Detects symlinks changed to regular files with content path symlink was pointing to.
+    - id: destroyed-symlinks
+    # Checks if you don't accidentally push a private key.
+    - id: detect-private-key
+    # Replaces double quoted strings with single quoted strings.
+    # This is not compatible with Python Black.
+    #- id: double-quote-string-fixer
+    # Makes sure files end in a newline and only a newline.
+    - id: end-of-file-fixer
+    # Removes UTF-8 byte order marker.
+    - id: fix-byte-order-marker
+    # Add <# -*- coding: utf-8 -*-> to the top of python files.
+    #- id: fix-encoding-pragma
+    # Checks if there are different line endings, like \n and crlf.
+    - id: mixed-line-ending
+    # Asserts `.py` files in folder `/test/` (by default:) end in `_test.py`.
+    - id: name-tests-test
+      # Override default to check if `.py` files in `/test/` START with `test_`.
+      args: ['--django']
+    # Ensures JSON files are properly formatted.
+    - id: pretty-format-json
+      args: ['--autofix']
+    # Sorts entries in requirements.txt and removes incorrect pkg-resources entries.
+    - id: requirements-txt-fixer
+    # Sorts simple YAML files which consist only of top-level keys.
+    - id: sort-simple-yaml
+    # Removes trailing whitespaces at end of lines of .. files.
+    - id: trailing-whitespace
+
+
+
+
+
+ - repo: https://github.com/PyCQA/autoflake
+   rev: v2.0.0
+   hooks:
+    - id: autoflake
+      args: ["--in-place", "--remove-unused-variables", "--remove-all-unused-imports", "--recursive"]
+      name: AutoFlake
+      description: "Format with AutoFlake"
+      stages: [commit]
+
+ - repo: https://github.com/PyCQA/bandit
+   rev: 1.7.4
+   hooks:
+   - id: bandit
+     name: Bandit
+     stages: [commit]
+
+# Enforces formatting style in Markdown (.md) files.
+ - repo: https://github.com/executablebooks/mdformat
+   rev: 0.7.16
+   hooks:
+   - id: mdformat
+     #args: ["-r ~MD013"]
+     additional_dependencies:
+     - mdformat-toc
+     - mdformat-gfm
+     - mdformat-black
+
+# - repo: https://github.com/MarcoGorelli/absolufy-imports
+#   rev: v0.3.1
+#   hooks:
+#   - id: absolufy-imports
+#     files: '^src/.+\.py$'
+#     args: ['--never', '--application-directories', 'src']
+
+ - repo: https://github.com/myint/docformatter
+   rev: v1.5.1
+   hooks:
+   - id: docformatter
+
+ - repo: https://github.com/pre-commit/pygrep-hooks
+   rev: v1.10.0
+   hooks:
+   - id: python-use-type-annotations
+   - id: python-check-blanket-noqa
+   - id: python-check-blanket-type-ignore
+
+# Updates the syntax of `.py` files to the specified python version.
+# It is not compatible with: pre-commit hook: fix-encoding-pragma
+ - repo: https://github.com/asottile/pyupgrade
+   rev: v3.3.1
+   hooks:
+     - id: pyupgrade
+       args: [--py38-plus]
+
+
+ - repo: https://github.com/igorshubovych/markdownlint-cli
+   rev: v0.33.0
+   hooks:
+     - id: markdownlint
+       args: ["--fix"]

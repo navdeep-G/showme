@@ -1,0 +1,61 @@
+# This is used to configure the black, isort and mypy such that the packages don't conflict.
+# This file is read by the pre-commit program.
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.mypy_cache
+  | build
+  | dist
+)/
+'''
+
+
+[tool.coverage.run]
+# Due to a strange bug with xml output of coverage.py not writing the full-path
+# of the sources, the full root directory is presented as a source alongside
+# the main package. As a result any importable Python file/package needs to be
+# included in the omit
+source = [
+    "foo",
+    ".",
+]
+# Excludes the following directories from the coverage report
+omit = [
+    "tests/*",
+    "setup.py",
+]
+
+
+[tool.isort]
+profile = "black"
+
+
+[tool.mypy]
+ignore_missing_imports = true
+
+
+[tool.pylint.basic]
+bad-names=[]
+[tool.pylint.messages_control]
+# Example: Disable error on needing a module-level docstring
+disable=[
+    "import-error",
+    "invalid-name",
+    "fixme",
+]
+
+
+[tool.pytest.ini_options]
+# Runs coverage.py through use of the pytest-cov plugin
+# An xml report is generated and results are output to the terminal
+
+# TODO: Disable this line to disable CLI coverage reports when running tests.
+# addopts = "--cov --cov-report xml:cov.xml --cov-report term"
+
+# Sets the minimum allowed pytest version
+minversion = 5.0
+# Sets the path where test files are located (Speeds up Test Discovery)
+testpaths = ["tests"]
