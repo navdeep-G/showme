@@ -1,0 +1,23 @@
+{
+  "editor.suggestSelection": "first",
+  "editor.tabCompletion": "on",
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.exclude": {
+    "**/*.egg-info*": true,
+    "**/.coverage.*": true,
+    "**/.mypy_cache": true,
+    "**/.pytest_cache": true,
+    "**/__init__*": true,
+    "**/__pycache__*": true,
+    "**/build*": true,
+    "**/dist*": true
+  },
+  "python.condaPath": "~/anaconda/bin/conda",
+  "searchOpenAllResults.delay": 150,
+  "searchOpenAllResults.fileResultsLimit": 300,
+  "searchOpenAllResults.resultsLimit": 250,
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "window.zoomLevel": -1,
+  "workbench.colorTheme": "Default High Contrast"
+}

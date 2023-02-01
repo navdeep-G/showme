@@ -1,0 +1,96 @@
+# This file is to automatically configure your environment. It allows you to
+# run the code with a single command without having to install anything
+# (extra).
+
+# First run: conda env create --file environment.yml
+# If you change this file, run: conda env update --file environment.yml
+
+# Instructions for this networkx-to-lava-nc repository only. First time usage
+# On Ubuntu (this is needed for lava-nc):
+# sudo apt upgrade
+# sudo apt full-upgrade
+# yes | sudo apt install gcc
+
+# For code structure visualisation:
+# yes | sudo apt install graphviz
+
+# Conda configuration settings. (Specify which modules/packages are installed.)
+name: customshowme
+channels:
+  - conda-forge
+dependencies:
+# Specify specific python version.
+  - python=3.10
+  # Generate plots.
+  - matplotlib
+# Pre-commit packages for code quality:
+# Run python tests.
+  - pytest-cov
+# Turns relative import paths into absolute import paths.
+  - absolufy-imports
+# Auto format Python code to make it flake8 compliant.
+  - autoflake
+# Scan Python code for security issues.
+  - bandit
+# Code formatting compliance.
+  - black
+# Correct code misspellings.
+  - codespell
+# Verify percentage of code that has at least 1 test.
+  - coverage
+# Auto formats the Python documentation written in the code.
+  - docformatter
+# Auto generate docstrings.
+  - flake8
+# Auto sort the import statements.
+  - isort
+# Auto format Markdown files.
+  - mdformat
+# Auto check static typing.
+  - mypy
+  # Run graph software quickly.
+  # Lava depends on networkx 2.8.7
+  - networkx==2.8.7
+# Auto generate documentation.
+  - pdoc3
+# Another static type checker for python like mypy.
+  - pyright
+# Include GitHub pre-commit hook.
+  - pre-commit
+# Visualise the structure of the code based on a command.
+  - pycallgraph2
+# Automatically upgrades Python syntax to the new Python version syntax.
+  - pyupgrade
+# Auto generate docstrings.
+  - pyment
+# Auto check programming style aspects.
+  - pylint
+# Enable publishing the pip package.
+  - twine
+# Ensure the python function arguments are verified at runtime.
+  - typeguard
+# Enable creating the pip package.
+  - setuptools
+  - wheel
+# pip packages:
+  - pip
+  - pip:
+    # Run pip install on .tar.gz file in GitHub repository (For lava-nc only).
+    #- https://github.com/lava-nc/lava/releases/download/v0.3.0/lava-nc-0.3.0.tar.gz
+    #- https://github.com/lava-nc/lava/releases/download/v0.5.0/lava-nc-0.5.0.tar.gz
+    - https://github.com/a-t-0/lava/archive/refs/tags/v0.5.1.tar.gz
+    # Create gif of SNN behaviour.
+    - imageio
+    # Support parsing Json files.
+    - jsons
+    # Seems to be an autoformatter like black, but installed using npm instead of pip.
+    - prettier
+    # Tag files using Python.
+    - pytaggit
+    # Identify and remove dead code.
+    - vulture
+    #- pipreqs
+    # Allow for auto generation of type-hints during runtime.
+    - pyannotate
+    # Time function durations.
+    - showme
